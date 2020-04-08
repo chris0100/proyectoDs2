@@ -1,1 +1,0 @@
-web: gunicorn proyectoDs2.wsgi --log-file -

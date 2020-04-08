@@ -1,0 +1,133 @@
+{% extends 'base/baseTotalidad.html' %}
+
+{#anula los bloques de contenido#}
+{% block page_content %}
+    <!-- Dropdown Card Example -->
+    <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Listado de Cliente</h6>
+            <div class="dropdown no-arrow">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                     aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-header">Acciones</div>
+                    <a class="dropdown-item" onclick="return abrirModal('{% url 'facturacion:cliente_new' %}')"
+                       href="#"><i class="far fa-calendar-plus"></i>Nueva</a>
+                </div>
+            </div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+            {% if not obj %}
+                <div class="alert alert-info">No hay Clientes</div>
+            {% else %}
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <th>Id</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Tipo</th>
+                    <th>Telefono</th>
+                    <th>Estado</th>
+                    <th class="all">Acciones</th>
+                    </thead>
+                    <tbody>
+                    {% for item in obj %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.nombres }}</td>
+                            <td>{{ item.apellidos }}</td>
+                            <td>{{ item.tipo }}</td>
+                            <td>{{ item.celular }}</td>
+                            <td onclick="inactivar({{ item.id }})">
+                                {% if item.estado %}
+                                    <i class="far fa-thumbs-up text-primary" style="cursor: pointer"></i>
+                                {% else %}
+                                    <i class="far fa-thumbs-down text-danger" style="cursor: pointer"></i>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <button class="btn btn-warning btn-circle"
+                                        onclick="return abrirModal('{% url 'facturacion:cliente_edit' item.pk %}')"><i
+                                        class="far fa-edit"></i></button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock page_content %}
+
+
+{% block js_page %}
+    <script>
+        //Inactivar Usuario
+        function inactivar(id) {
+            var data = {id: id};
+            data = JSON.stringify(data);
+            var token = '{{ csrf_token }}';
+
+
+            $.ajax({
+                headers: {"X-CSRFToken": token},
+                type: "POST",
+                url: "/facturacion/clientes/estado/" + id,
+                data: data,
+                success: function (response) {
+                    if (response === 'OK') {
+                        location.reload();
+                    }
+                    else {mensaje("Error de cambio de estado");}
+                },
+                error: function(jqXHR, textStatus, errorThrow){
+                    console.log(textStatus, errorThrow);
+                    mensaje(errorThrow, 'red');
+                    cerrarModal();
+                }
+            });
+        }
+
+
+
+        //llama a los datatables jquery plugins
+        $(document).ready(function () {
+            $('.table').DataTable({
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla =(",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                    "buttons": {
+                        "copy": "Copiar",
+                        "colvis": "Visibilidad"
+                    }
+                }
+            });
+        });
+
+    </script>
+{% endblock js_page %}

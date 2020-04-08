@@ -1,0 +1,33 @@
+{% extends 'base/baseTotalidad.html' %}
+
+{#anula los bloques de contenido#}
+{% block page_content %}
+    <form method="POST" class="form-inline">
+
+        {% csrf_token %}
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                ¿Eliminar {{ obj.descripcion }}?
+                            </div>
+
+                            <button class="btn btn-danger" type="submit">Si, Eliminar</button>
+{#                            <a href="{% url 'inventario:categoria_list' %}" class="btn btn-success">Cancelar</a>#}
+{#                            nos devuelve a la ultima pagina visitada#}
+                            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-success">Cancelar</a>
+                        </div>
+                        <div class="col-auto">
+                            <i class="far fa-question-circle fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock page_content %}
+
+
+{% block js_page %}   {% endblock js_page %}

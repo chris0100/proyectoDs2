@@ -1,0 +1,126 @@
+{% extends 'base/baseTotalidad.html' %}
+
+{#anula los bloques de contenido#}
+{% block page_content %}
+    <!-- Dropdown Card Example -->
+    <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Listado de Facturas</h6>
+
+        </div>
+
+
+        <!-- Card Body -->
+        <div class="card-body">
+
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <label >Fecha inicio</label>
+                    <input type="text" class="form-class" name="f1" id="f1" readonly>
+                </div>
+                <div class="col-md-4">
+                     <label >Fecha fin</label>
+                    <input type="text" class="form-class" name="f2" id="f2" readonly>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-warning" type="button" id="btnPrint">Imprimir</button>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="buttons-toolbar mb-3">
+                <a href="{% url 'facturacion:factura_new' %}" class="btn btn-success"><i
+                        class="far fa-calendar-plus"></i>Nuevo</a>
+            </div>
+            {% if not obj %}
+                <div class="alert alert-info">No hay Facturas</div>
+
+            {% else %}
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <th>No. Factura</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th class="all">Acciones</th>
+                    </thead>
+                    <tbody>
+                    {% for item in obj %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.cliente }}</td>
+                            <td>{{ item.total }}</td>
+                            <td onclick="inactivar({{ item.id }})">
+                                {% if item.estado %}
+                                    <i class="far fa-thumbs-up text-primary" style="cursor: pointer"></i>
+                                {% else %}
+                                    <i class="far fa-thumbs-down text-danger"></i>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'facturacion:factura_edit' item.id %}"
+                                   class="btn btn-warning btn-circle"><i class="far fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock page_content %}
+
+
+
+
+
+
+{% block js_page %}
+    <script>
+
+        //llama a los datatables jquery plugins
+        $(document).ready(function () {
+            $('.table').DataTable({
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla =(",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                    "buttons": {
+                        "copy": "Copiar",
+                        "colvis": "Visibilidad"
+                    }
+                }
+            });
+        });
+
+        {#ACTIVA LA FECHA EN UN INPUT PARA SELECCIONAR#}
+        $(function () {
+            $("#f1, #f2").datetimepicker({
+                format: 'Y-m-d',
+                timepicker:false
+            });
+        });
+
+    </script>
+{% endblock js_page %}

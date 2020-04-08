@@ -1,0 +1,21 @@
+{% extends 'base/baseTotalidad.html' %}
+
+{% block page_content %}
+
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Acceso denegado</h5>
+                <p class="card-text">No tienes privilegios para acceder a este recurso</p>
+                <div class="text-xs font-weight-bold text-primary text-uppercase m-3">
+                    Usuario:
+                    <mark> {{ user.username }} {{ user.get_full_name }}</mark>
+                </div>
+                <div class="dropdown-diviver"></div>
+                <a href="{% url 'bases:home' %}" class="btn btn-primary">Ir a Inicio</a>
+                <a href="{% url 'bases:login' %}" class="btn btn-secondary">Ingresar con otro usuario</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

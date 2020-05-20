@@ -2,7 +2,7 @@
 
 {#anula los bloques de contenido#}
 {% block page_content %}
-    <div class="fondo-2" style="min-height: 820px;">
+        <div class="fondo-3" style="min-height: 850px;">
 
         <form method="POST" class="form-inline pt-3">
             {% csrf_token %}
@@ -29,11 +29,11 @@
                                 <div class="col-5">
 
                                     <div class="input-group">
-                                        {#                                    {% if obj %}#}
-                                        {#                                        <input type="text" name="categoria" maxlength="100" class="form-control"#}
-                                        {#                                               required id="id_categoria" placeholder="Categoria"#}
-                                        {#                                               value="{% if obj %} {{ obj.categoria }} {% endif %}">#}
-                                        {#                                    {% endif %}#}
+{#                                                                            {% if obj %}#}
+{#                                                                                <input type="text" name="categoria" maxlength="100" class="form-control"#}
+{#                                                                                       required id="id_categoria" placeholder="Categoria"#}
+{#                                                                                       value="{% if obj %} {{ obj.categoria }} {% endif %}">#}
+{#                                                                            {% endif %}#}
                                         {{ form.categoria }}
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                                 </div>
 
                                 <div class="col-2">
-                                    <div class="input-group">
+                                    <div class="form-group">
                                         <label for="id_estado">Estado</label>
                                         <input type="checkbox" name="estado" class="form-control ml-2" id="id_estado"
                                                 {% if obj.estado %} checked {% endif %}>

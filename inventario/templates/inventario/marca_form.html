@@ -2,9 +2,9 @@
 
 {#anula los bloques de contenido#}
 {% block page_content %}
-        <div class="fondo-2" style="min-height: 820px;">
+        <div class="fondo-3" style="min-height: 850px;">
 
-    <form method="POST" class="form-inline">
+    <form method="POST" class="form-inline pt-3">
         {% csrf_token %}
         <div class="col-xl-6 col-md-6 mb-4">
 
@@ -19,13 +19,13 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
 
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                            {% if obj %} Editar Marca {% else %} Nueva Marca {% endif %}
                         </div>
 
                         <div class="dropdown-divider"></div>
                         <div class="row">
-                            <div class="col-10">
+                            <div class="col-sm-6">
 
                                 <div class="input-group">
                                     <input type="text" name="descripcion" maxlength="100" class="form-control"
@@ -37,7 +37,7 @@
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado">Estado</label>
-                                    <input type="checkbox" name="estado" class="form-control" id="id_estado" {% if obj.estado %} checked {% endif %}>
+                                    <input type="checkbox" name="estado" class="form-control ml-2" id="id_estado" {% if obj.estado %} checked {% endif %}>
                                 </div>
                             </div>
 
@@ -46,10 +46,10 @@
 
                         <div class="row">
                             <div class="col">
-                                <button class="btn btn-success" type="submit"><span class="fa fa-save"></span>Guardar
+                                <button class="btn btn-facebook" type="submit"><span class="fa fa-save"></span> Guardar
                                 </button>
-                                <a href="{% url 'inventario:marca_list' %}" class="btn btn-danger"><span
-                                        class="fa fa-undo"></span>Cancelar</a>
+                                <a href="{% url 'inventario:marca_list' %}" class="btn btn-google"><span
+                                        class="fa fa-undo"></span> Cancelar</a>
                             </div>
                         </div>
 

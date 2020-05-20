@@ -2,6 +2,8 @@
 
 {#anula los bloques de contenido#}
 {% block page_content %}
+            <div class="fondo-2" style="min-height: 820px;">
+
     <!-- Dropdown Card Example -->
     <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
@@ -15,7 +17,7 @@
                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                      aria-labelledby="dropdownMenuLink">
                     <div class="dropdown-header">Acciones</div>
-                    <a class="dropdown-item"   onclick="return abrirModal('{% url 'proveedores:proveedor_new' %}')" href="#"><i class="far fa-calendar-plus"></i>Nueva</a>
+                    <a class="dropdown-item"   onclick="return abrirModal('{% url 'proveedores:proveedor_new' %}')" href="#"><i class="far fa-calendar-plus"></i> Nuevo</a>
                 </div>
             </div>
         </div>

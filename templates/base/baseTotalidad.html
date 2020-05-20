@@ -71,7 +71,7 @@
             <div class="sidebar-brand-icon">
                 <img src="{% static 'base/img/machine.png' %}" alt="" class="machine">
             </div>
-            <div class="sidebar-brand-text sombra-texto-2">REFRI LAVADORAS</div>
+            <div class="sidebar-brand-text sombra-texto-2 text-dark">REFRI LAVADORAS</div>
         </a>
 
         <!-- Divider -->
@@ -94,45 +94,45 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            <div class="nav-link collapsed" href="#" data-toggle="collapse" data-target=""
                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
+                <i class="fas fa-fw fa-cog "></i>
                 <span class="sombra-texto-2 font-weight-bold text-white">Catalogos</span>
-            </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            </div>
+            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Catalogos de Inventario</h6>
 
                     {% if perms.inventario.view_categoria %}
-                        <a class="collapse-item" href="{% url 'inventario:categoria_list' %}">Categorias</a>
+                        <a class="collapse-item" id="tab-categorias" href="{% url 'inventario:categoria_list' %}">Categorias</a>
                     {% endif %}
 
                     {% if perms.inventario.view_subcategoria %}
-                        <a class="collapse-item" href="{% url 'inventario:subcategoria_list' %}">Sub-Categorias</a>
+                        <a class="collapse-item" id="tab-subcategorias" href="{% url 'inventario:subcategoria_list' %}">Sub-Categorias</a>
                     {% endif %}
 
                     {% if perms.inventario.view_marca %}
-                        <a class="collapse-item" href="{% url 'inventario:marca_list' %}">Marcas</a>
+                        <a class="collapse-item" id="tab-marcas" href="{% url 'inventario:marca_list' %}">Marcas</a>
                     {% endif %}
 
                     {% if perms.inventario.view_unidaddemedida %}
-                        <a class="collapse-item" href="{% url 'inventario:um_list' %}">Unidades de Medida</a>
+                        <a class="collapse-item" id="tab-um" href="{% url 'inventario:um_list' %}">Unidades de Medida</a>
                     {% endif %}
 
                     {% if perms.inventario.view_producto %}
-                        <a class="collapse-item" href="{% url 'inventario:producto_list' %}">Productos</a>
+                        <a class="collapse-item" id="tab-productos" href="{% url 'inventario:producto_list' %}">Productos</a>
                     {% endif %}
 
                     <h6 class="collapse-header">Catalogos de compras</h6>
                     {#                    puede editar y ver proveedores#}
                     {% if perms.proveedores.view_proveedor %}
-                        <a class="collapse-item" href="{% url 'proveedores:proveedor_list' %}">Proveedores</a>
+                        <a class="collapse-item" id="tab-proveedor" href="{% url 'proveedores:proveedor_list' %}">Proveedores</a>
                     {% endif %}
 
                     <h6 class="collapse-header">Catalogos de Facturacion</h6>
                     {#                    puede editar y ver proveedores#}
                     {% if perms.facturacion.view_cliente %}
-                        <a class="collapse-item" href="{% url 'facturacion:cliente_list' %}">Clientes</a>
+                        <a class="collapse-item" id="tab-clientes" href="{% url 'facturacion:cliente_list' %}">Clientes</a>
                     {% endif %}
 
                 </div>
@@ -141,16 +141,16 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            <div class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-truck"></i>
                 <span class="sombra-texto-2 font-weight-bold text-white">Movimientos</span>
-            </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            </div>
+            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Movimientos financieros</h6>
-                    <a class="collapse-item" href="{% url 'proveedores:compras_list' %}">Compras</a>
-                    <a class="collapse-item" href="{% url 'facturacion:factura_list' %}">Facturas</a>
+                    <a class="collapse-item" id="tab-compras" href="{% url 'proveedores:compras_list' %}">Compras</a>
+                    <a class="collapse-item" id="tab-facturas" href="{% url 'facturacion:factura_list' %}">Facturas</a>
                 </div>
             </div>
         </li>
@@ -330,6 +330,32 @@
     ScrollReveal().reveal('.scrolli');
     ScrollReveal().reveal('.scrolli', { delay: 250,duration: 1000,reset: false});
     ScrollReveal().reveal('.scrolli', { scale: 0.85 });
+
+
+
+    /// Url actual
+let url = window.location.href;
+console.log(url);
+/// Elementos de li
+const tabs = [ "subcategorias","categorias", "marcas", "um", "productos", "compras","proveedor","clientes","facturas"];
+tabs.forEach(e => {
+    /// Agregar .php y ver si lo contiene en la url
+    if (url.toString().includes(e)) {
+        console.log('encontrado');
+        /// Agregar tab- para hacer que coincida la Id
+        setActive("tab-" + e);
+        loop.stop = true;
+    }
+
+});
+
+/// Funcion que asigna la clase active
+function setActive(id) {
+    document.getElementById(id).setAttribute("class", "collapse-item active");
+}
+
+
+
 
 </script>
 

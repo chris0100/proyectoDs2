@@ -2,62 +2,68 @@
 
 {#anula los bloques de contenido#}
 {% block page_content %}
-    <form method="POST" class="form-inline">
-        {% csrf_token %}
-        <div class="col-xl-6 col-md-6 mb-4">
+    <div class="fondo-3" style="min-height: 850px;">
 
-            {#        si el objeto esta para editar, muestra un color, sino muestra otro.#}
-            {% if obj %}
-                <div class="card border-left-warning shadow h-100 py-2">
-            {% else %}
-                <div class="card border-left-success shadow h-100 py-2">
-            {% endif %}
+        <form method="POST" class="form-inline">
+            {% csrf_token %}
+            <div class="col-xl-6 col-md-6 mb-4">
 
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
+                {#        si el objeto esta para editar, muestra un color, sino muestra otro.#}
+                {% if obj %}
+                    <div class="card border-left-warning shadow h-100 py-2">
+                {% else %}
+                    <div class="card border-left-primary shadow h-100 py-2">
+                {% endif %}
 
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                           {% if obj %} Editar Unidad de Medida {% else %} Nueva Unidad de Medida {% endif %}
-                        </div>
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
 
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                {% if obj %} Editar Unidad de Medida {% else %} Nueva Unidad de Medida {% endif %}
+                            </div>
 
-                                <div class="input-group">
-                                    <input type="text" name="descripcion" maxlength="100" class="form-control"
-                                           required id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif %}">
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                <div class="col-10">
+
+                                    <div class="input-group">
+                                        <input type="text" name="descripcion" maxlength="100" class="form-control"
+                                               required id="id_descripcion" placeholder="Descripción"
+                                               value="{% if obj %} {{ obj.descripcion }} {% endif %}">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="id_estado">Estado</label>
+                                        <input type="checkbox" name="estado" class="form-control ml-2" id="id_estado"
+                                                {% if obj.estado %} checked {% endif %}>
+                                    </div>
                                 </div>
 
                             </div>
+                            <div class="dropdown-divider"></div>
 
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <label for="id_estado">Estado</label>
-                                    <input type="checkbox" name="estado" class="form-control" id="id_estado" {% if obj.estado %} checked {% endif %}>
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-facebook" type="submit"><span class="fa fa-save"></span>
+                                        Guardar
+                                    </button>
+                                    <a href="{% url 'inventario:um_list' %}" class="btn btn-google"><span
+                                            class="fa fa-undo"></span> Cancelar</a>
                                 </div>
                             </div>
 
                         </div>
-                        <div class="dropdown-divider"></div>
-
-                        <div class="row">
-                            <div class="col">
-                                <button class="btn btn-success" type="submit"><span class="fa fa-save"></span>Guardar
-                                </button>
-                                <a href="{% url 'inventario:um_list' %}" class="btn btn-danger"><span
-                                        class="fa fa-undo"></span>Cancelar</a>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
+                </div>
+                </div>
             </div>
-            </div>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 {% endblock page_content %}
 
 
@@ -65,4 +71,4 @@
     <script>
         $('footer').hide();
     </script>
-     {% endblock js_page %}
+{% endblock js_page %}

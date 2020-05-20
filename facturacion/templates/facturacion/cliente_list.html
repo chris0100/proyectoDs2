@@ -2,6 +2,8 @@
 
 {#anula los bloques de contenido#}
 {% block page_content %}
+            <div class="fondo-2" style="min-height: 820px;">
+
     <!-- Dropdown Card Example -->
     <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
@@ -16,7 +18,7 @@
                      aria-labelledby="dropdownMenuLink">
                     <div class="dropdown-header">Acciones</div>
                     <a class="dropdown-item" onclick="return abrirModal('{% url 'facturacion:cliente_new' %}')"
-                       href="#"><i class="far fa-calendar-plus"></i>Nueva</a>
+                       href="#"><i class="far fa-calendar-plus"></i> Nuevo</a>
                 </div>
             </div>
         </div>
@@ -62,6 +64,7 @@
             {% endif %}
         </div>
     </div>
+            </div>
 {% endblock page_content %}
 
 

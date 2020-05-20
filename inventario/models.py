@@ -35,7 +35,7 @@ class SubCategoria(Modelado):
     )
 
     def __str__(self):
-        return '{}:{}'.format(self.categoria.descripcion,self.descripcion)
+        return '{} : {}'.format(self.categoria.descripcion,self.descripcion)
 
     def _save(self):
         self.descripcion = self.descripcion.upper()
@@ -102,6 +102,7 @@ class Producto(Modelado):
     descripcion = models.CharField(max_length=200)
     precio = models.FloatField(default=0)
     existencia = models.IntegerField(default=0)
+
     ultima_compra = models.DateField(null=True, blank=True)
 
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)

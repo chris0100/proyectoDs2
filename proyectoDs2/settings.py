@@ -25,7 +25,7 @@ SECRET_KEY = '^_=6a1ai-2r^d99++ycee13x9qxd2*wn6w%!(+*mf1r5wp$e#r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'proyectoDs2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangoCurso',
+        'NAME': 'proyecto',
         'HOST': 'localhost',
         'USER': 'postgres',
         'PASSWORD': 'fence0gras',

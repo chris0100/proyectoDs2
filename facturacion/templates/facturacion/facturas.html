@@ -6,9 +6,9 @@
         {% csrf_token %}
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <a href="#" class="btn btn-danger">Guardar</a>
-                <a href="{% url 'facturacion:factura_imprimir_one' enc.id %}" class="btn btn-success" target="_factura">Imprimir</a>
-                <a href="{% url 'facturacion:factura_list' %}" class="btn btn-info">Cancelar</a>
+                <a href="#" class="btn btn-danger"><i class="far fa-save"></i> Guardar</a>
+                <a href="{% url 'facturacion:factura_imprimir_one' enc.id %}" class="btn btn-success" target="_factura"><i class="fas fa-print"></i> Imprimir</a>
+                <a href="{% url 'facturacion:factura_list' %}" class="btn btn-info"><i class="fas fa-undo-alt"></i> Regresar</a>
             </div>
 
             <div class="card-body">

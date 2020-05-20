@@ -33,6 +33,10 @@
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <a href="{% url 'proveedores:proveedor_list' %}" class="btn btn-primary mb-3">Añadir nuevo Proveedor</a>
+                                </div>
+
 
                                 <div class="row">
 
@@ -116,7 +120,8 @@
                                                style="width: 100%">
                                             <thead>
                                             <th>Id</th>
-                                            <th class="all">Sub.Cat.</th>
+                                            <th class="all">Producto</th>
+                                            <th class="all">Marca</th>
                                             <th class="all">Descripcion</th>
                                             <th class="all">Acciones</th>
                                             </thead>
@@ -126,11 +131,12 @@
                                                 <tr>
                                                     <td>{{ item.id }}</td>
                                                     <td>{{ item.subCategoria }}</td>
+                                                    <td>{{ item.marca }}</td>
                                                     <td>{{ item.descripcion }}</td>
                                                     <td>
-                                                        <button type="button" class="btn btn-warning btn-circle"
-                                                                onclick="selectProducto({{ item.id }}, '{{ item.descripcion }}')">
-                                                            <i class="far fa-hand-pointer"></i></button>
+                                                        <button type="button" class="btn btn-primary btn-circle"
+                                                                onclick="selectProducto({{ item.id }}, '{{ item.subCategoria }}', '{{ item.marca }}')">
+                                                            <i class="far fa-plus-square"></i></button>
                                                     </td>
                                                 </tr>
                                             {% endfor %}
@@ -142,20 +148,26 @@
 
                                 <div class="form-group row">
                                     <label for="id_id_producto" class="col-sm-3 col-form-label">Producto</label>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-1">
                                         <input type="text" readonly class="form-control-plaintext" name="id_id_producto"
                                                id="id_id_producto" value="" required>
                                     </div>
 
-                                    <div class="col-sm-7">
+                                    <div class="col-sm-3">
                                         <input type="text" readonly class="form-control-plaintext"
-                                               name="id_descripcion_producto" id="id_descripcion_producto" value=""
+                                               name="id_subCategoria_producto" id="id_subCategoria_producto" value=""
+                                               required>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <input type="text" readonly class="form-control-plaintext"
+                                               name="id_marca_producto" id="id_marca_producto" value=""
                                                required>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="id_cantidad_detalle" class="col-sm-2 col-form-label">Cant.:</label>
+                                    <label for="id_cantidad_detalle" class="col-sm-2 col-form-label">Cantidad:</label>
                                     <div class="col-sm-2">
                                         <input type="number" class="form-control" name="id_cantidad_detalle"
                                                id="id_cantidad_detalle" value="00" required>
@@ -165,7 +177,7 @@
                                         <input type="number" class="form-control" name="id_precio_detalle"
                                                id="id_precio_detalle" value="00" required>
                                     </div>
-                                    <label for="id_descuento_detalle" class="col-sm-2 col-form-label">Desc.:</label>
+                                    <label for="id_descuento_detalle" class="col-sm-2 col-form-label">Descuento:</label>
                                     <div class="col-sm-2">
                                         <input type="text" class="form-control" name="id_descuento_detalle"
                                                id="id_descuento_detalle" value="00">
@@ -194,10 +206,10 @@
                                 <div class="dropdown-divider"></div>
                                 <div class="row">
                                     <div class="col">
-                                        <button class="btn btn-danger" type="submit"><span class="fa fa-save"></span>Guardar
+                                        <button class="btn btn-success" type="submit"><span class="fa fa-save"></span> Guardar
                                         </button>
-                                        <a href="{% url 'proveedores:compras_list' %}" class="btn btn-success"><i
-                                                class="far fa-hand-point-left"></i>Cancelar</a>
+                                        <a href="{% url 'proveedores:compras_list' %}" class="btn btn-danger"><i
+                                                class="far fa-hand-point-left"></i> Regresar</a>
                                     </div>
                                 </div>
                             </div>
@@ -318,7 +330,7 @@
 
         {#para que al seleccionar los productos se muestren mas abajo#}
 
-        function selectProducto(id, descripcion) {
+        function selectProducto(id, subCategoria,marca) {
             {#se inicializan los campos#}
             $('#id_cantidad_detalle').val(0);
             $('#id_precio_detalle').val(0);
@@ -328,7 +340,10 @@
             $('#id_total_detalle').val(0);
 
             $('#id_id_producto').val(+id);
-            $('#id_descripcion_producto').val(descripcion);
+            $('#id_subCategoria_producto').val(subCategoria);
+            $('#id_marca_producto').val(marca);
+
+
 
             //hace un focus para que el usuario seleccione la cantidad
             $('#id_cantidad_detalle').focus();

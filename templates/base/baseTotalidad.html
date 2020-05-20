@@ -16,11 +16,16 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="{% static 'base/css/sb-admin-2.css' %}" rel="stylesheet">
+
 
     <!-- Custom styles for this page -->
     <link href="{% static 'base/vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+    {#    estilos agregados css#}
+    <link href="{% static 'base/css/style2.css' %}" rel="stylesheet">
+
+        <!-- Custom styles for this template-->
+    <link href="{% static 'base/css/sb-admin-2.css' %}" rel="stylesheet">
 
     {#    CARGA DE JQUERY PARA VENTANAS DE CONFIRMACION#}
     <link href="{% static 'base/vendor/jquery_confirm/jquery-confirm.min.css' %}" rel="stylesheet">
@@ -37,9 +42,21 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 
 
+         <!-- para realizar la efecto scroll -->
+     <script src="https://unpkg.com/scrollreveal"></script>
+     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+
+  <style>
+    .scrolli{
+   visibility:hidden;
+   }
+    </style>
+
+
 </head>
 
-<body id="page-top" class="bg-gradient-primary">
+<body id="page-top" class="fondo">
+
 
 
 {% block side_bar %}
@@ -47,14 +64,14 @@
     <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav fondo-barra sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'bases:home' %}">
+        <a class="sidebar-brand d-flex align-items-center fondo-barra-inf justify-content-center" href="{% url 'bases:home' %}">
             <div class="sidebar-brand-icon">
                 <img src="{% static 'base/img/machine.png' %}" alt="" class="machine">
             </div>
-            <div class="sidebar-brand-text ">REFRI-LAVADORAS</div>
+            <div class="sidebar-brand-text sombra-texto-2">REFRI LAVADORAS</div>
         </a>
 
         <!-- Divider -->
@@ -64,14 +81,14 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'bases:home' %}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Panel Principal</span></a>
+                <span class="sombra-texto-2 font-weight-bold text-white">Panel Principal</span></a>
         </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
-        <div class="sidebar-heading">
+        <div class="sidebar-heading sombra-texto-2 font-weight-bold text-white">
             Opciones de Menú
         </div>
 
@@ -80,7 +97,7 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Catalogos</span>
+                <span class="sombra-texto-2 font-weight-bold text-white">Catalogos</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -127,7 +144,7 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-truck"></i>
-                <span>Movimientos</span>
+                <span class="sombra-texto-2 font-weight-bold text-white">Movimientos</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -164,7 +181,11 @@
 
         <!-- NAV BAR PRINCIPAL -->
         {% block top_bar %}
-            <nav class="navbar navbar-expand navbar-light bg-secondary topbar mb-4 static-top shadow">
+            <nav class="navbar navbar-expand navbar-light fondo-barra-lateral topbar static-top shadow">
+
+                <ul class="navbar-nav d-flex align-items-center justify-content-center">
+                    <small><p class="text-uppercase text-center text-dark font-weight-bolder"><i class="fab fa-buffer"></i> Sistema de Compra y Facturacion (SCF) version 1.0</p></small>
+                </ul>
 
 
                 <!-- Topbar Navbar -->
@@ -176,7 +197,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle cambiarColorAzulHov" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-dark text-uppercase font-weight-bolder">{{ user.username }}</span>
+                            <span class="mr-2 d-none d-lg-inline text-dark text-uppercase font-weight-bolder sombra-texto">{{ user.username }}</span>
                             <img class="img-profile rounded-circle" src="{{ user.email }}">
                         </a>
                         <!-- Dropdown - User Information -->
@@ -197,11 +218,11 @@
 
 
         {% block page_content %}
-            <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">Esperando para agregar....</h1>
+             <div class="fondo-2 siza">
 
+             <div class="enjoy-css mr-auto ml-auto scrolli">Bienvenido !!!</div>
+             <div class="enjoy-css-2 mr-auto ml-auto scrolli"><span class="text-uppercase">{{ user.username }}</span>, usa el panel izquierdo para navegar</div>
             </div>
             <!-- /.container-fluid -->
         {% endblock page_content %}
@@ -212,12 +233,10 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Diseño de interfaces de Usuario - UNIVALLE</span>
+            <footer class="sticky-footer bg-white ">
+                    <div class="copyright text-center align-item-center">
+                        <span class="font-weight-bolder">&copy;RefriLavadoras 2020 - Todos los derechos reservados</span>
                     </div>
-                </div>
             </footer>
             <!-- End of Footer -->
 
@@ -295,6 +314,9 @@
 {#SELECT2#}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
+{# texto #}
+<script type="text/javascript" script-name="artifika" src="http://use.edgefonts.net/artifika.js"></script>
+
 
 <script>
     $(document).ready(function () {
@@ -302,6 +324,14 @@
     })
 </script>
 {#/*********************************#}
+
+<script>
+    // scroll en pantalla
+    ScrollReveal().reveal('.scrolli');
+    ScrollReveal().reveal('.scrolli', { delay: 250,duration: 1000,reset: false});
+    ScrollReveal().reveal('.scrolli', { scale: 0.85 });
+
+</script>
 
 
 

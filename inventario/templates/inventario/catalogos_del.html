@@ -2,7 +2,9 @@
 
 {#anula los bloques de contenido#}
 {% block page_content %}
-    <form method="POST" class="form-inline">
+    <div class="fondo-2" style="min-height: 780px;">
+
+    <form method="POST" class="form-inline pt-2">
 
         {% csrf_token %}
         <div class="col-xl-3 col-md-6 mb-4">
@@ -10,23 +12,25 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
                                 ¿Eliminar {{ obj.descripcion }}?
                             </div>
 
-                            <button class="btn btn-danger" type="submit">Si, Eliminar</button>
-{#                            <a href="{% url 'inventario:categoria_list' %}" class="btn btn-success">Cancelar</a>#}
-{#                            nos devuelve a la ultima pagina visitada#}
-                            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-success">Cancelar</a>
+                            <button class="btn btn-facebook" type="submit">Si, Eliminar</button>
+                            {#                            <a href="{% url 'inventario:categoria_list' %}" class="btn btn-success">Cancelar</a>#}
+                            {#                            nos devuelve a la ultima pagina visitada#}
+                            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-google">Cancelar</a>
                         </div>
                         <div class="col-auto">
-                            <i class="far fa-question-circle fa-2x text-gray-300"></i>
+                            <i class="far fa-question-circle fa-5x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
+    </div>
+
 {% endblock page_content %}
 
 
